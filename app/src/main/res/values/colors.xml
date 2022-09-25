@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="bg_mainActivity">#33000000</color>
+    <color name="holo_orange_dark">#33FF31</color>
 </resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--<item-->
+    <!--    android:id="@+id/favorite"-->
+    <!--    android:icon="@drawable/ic_mail"-->
+    <!--    android:title="favorite"-->
+
+    <!--    app:showAsAction="ifRoom" />-->
+
+    <!--<item-->
+    <!--    android:id="@+id/search"-->
+    <!--    android:icon="@drawable/ic_search"-->
+    <!--    android:title="search"-->
+
+    <!--    app:showAsAction="ifRoom" />-->
+
+    <!--<item-->
+    <!--    android:id="@+id/more"-->
+    <!--    android:title="Demo"-->
+
+    <!--    app:showAsAction="never" />-->
+    <item
+        android:id="@+id/cart"
+        android:title="Cart"
+        android:icon="@drawable/ic_more"
+        app:showAsAction="always"
+        />
+    <!--        android:actionLayout="@layout/cartmenulayout"-->
+
+
+</menu>

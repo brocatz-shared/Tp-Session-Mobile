@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-
-
-
-
-
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.HomeActivity">
-
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintHorizontal_weight="1"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="150dp"
-        tools:layout_editor_absoluteY="196dp">
+        android:orientation="vertical" >
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="page_title"
+                app:menu="@menu/top_app_bar"
+                app:navigationIcon="@drawable/ic_drawer"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
 
         <ScrollView
             android:layout_width="match_parent"
@@ -33,11 +41,9 @@
             android:name="com.androidquebec.tpsessionmobile.fragments.HomeFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-
-        </FrameLayout>
+            android:layout_weight="1" />
         </ScrollView>
+
 
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -49,4 +55,4 @@
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>

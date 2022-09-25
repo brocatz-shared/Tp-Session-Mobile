@@ -2,9 +2,11 @@ package com.androidquebec.tpsessionmobile.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -12,6 +14,7 @@ import com.androidquebec.tpsessionmobile.R;
 import com.androidquebec.tpsessionmobile.fragments.HomeFragment;
 import com.androidquebec.tpsessionmobile.fragments.OrderFragment;
 import com.androidquebec.tpsessionmobile.fragments.SearchFragment;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
@@ -20,10 +23,12 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private BottomNavigationView navigationView;
+    private MaterialToolbar materialToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+       // setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_home2);
 
         setWidgets();
         setListeners();
@@ -50,12 +55,29 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        // Set Cart Listener
+        materialToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                if (item.getItemId() == R.id.cart) {
+                    Intent intent =new Intent(HomeActivity.this,CartActivity.class);
+
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+        });
+
     }
 
     private void setWidgets() {
         loadFragment(new HomeFragment(this), 0 );
 
         navigationView = (BottomNavigationView)  findViewById(R.id.bottom_navigation);
+        materialToolbar = (MaterialToolbar) findViewById(R.id.topAppBar);
+
 
     }
 
