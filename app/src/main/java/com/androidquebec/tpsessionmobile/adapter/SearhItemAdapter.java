@@ -8,9 +8,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidquebec.tpsessionmobile.R;
+import com.androidquebec.tpsessionmobile.activity.HomeActivity;
+import com.androidquebec.tpsessionmobile.fragments.DetailFragement;
 import com.androidquebec.tpsessionmobile.model.Article;
 
 import java.util.List;
@@ -19,10 +25,10 @@ import java.util.List;
 public class SearhItemAdapter extends RecyclerView.Adapter<SearhItemAdapter.ViewHolder> {
 
     int layoutId;
-    Activity context;
+    HomeActivity context;
     List<Article> articleList;
 
-    public SearhItemAdapter(int layoutId, Activity context, List<Article> articleList) {
+    public SearhItemAdapter(int layoutId, HomeActivity context, List<Article> articleList) {
         this.layoutId = layoutId;
         this.context = context;
         this.articleList = articleList;
@@ -68,6 +74,22 @@ public class SearhItemAdapter extends RecyclerView.Adapter<SearhItemAdapter.View
         holder.getTxtArticleTitle().setText("sdsdsd");
         holder.getImgArticleImage().setBackgroundResource(R.drawable.ic_search);
 
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity appCompatActivity = (AppCompatActivity) view.getContext();
+                DetailFragement detailFragement = new DetailFragement(context);
+                FragmentTransaction transaction = appCompatActivity.getSupportFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.home_fragment,detailFragement);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+
+
     }
 
 
@@ -75,4 +97,7 @@ public class SearhItemAdapter extends RecyclerView.Adapter<SearhItemAdapter.View
     public int getItemCount() {
         return 100;
     }
+
+
+
 }

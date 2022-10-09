@@ -42,6 +42,7 @@ public class SearchFragment extends Fragment {
         RecyclerView rv_searchPage = view.findViewById(R.id.rv_searchPage);
 
         rv_searchPage.setAdapter(new SearhItemAdapter(R.layout.item_search_page_cardview,context,new ArrayList<Article>()));
+
         return view;
     }
 }

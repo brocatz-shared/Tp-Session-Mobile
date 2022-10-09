@@ -85,9 +85,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private void loadFragment (Fragment fragment, int string) {
        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
        transaction.replace(R.id.home_fragment,fragment);
-       transaction.addToBackStack(null);
+//       transaction.addToBackStack(null);
        transaction.commit();
     }
 }

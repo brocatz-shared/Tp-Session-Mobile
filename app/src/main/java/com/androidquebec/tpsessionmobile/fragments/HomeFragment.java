@@ -50,4 +50,6 @@ public class HomeFragment extends Fragment {
       rv_home_page.addItemDecoration(new ItemDecorator());
       return view;
     }
+
+
 }
