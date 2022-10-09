@@ -1,5 +1,6 @@
 package com.androidquebec.tpsessionmobile.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ public class Article implements Comparable<Article> {
     private double prix;
     private int rating;
 
-    private Date date;
+    private LocalDateTime date;
     private String image;
 
 
@@ -43,11 +44,11 @@ public class Article implements Comparable<Article> {
         this.description = description;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

@@ -13,8 +13,11 @@ import com.androidquebec.tpsessionmobile.R;
 import com.androidquebec.tpsessionmobile.activity.HomeActivity;
 import com.androidquebec.tpsessionmobile.adapter.SearhItemAdapter;
 import com.androidquebec.tpsessionmobile.model.Article;
+import com.androidquebec.tpsessionmobile.model.RegistreArticle;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 
 public class SearchFragment extends Fragment {
@@ -41,7 +44,10 @@ public class SearchFragment extends Fragment {
 
         RecyclerView rv_searchPage = view.findViewById(R.id.rv_searchPage);
 
-        rv_searchPage.setAdapter(new SearhItemAdapter(R.layout.item_search_page_cardview,context,new ArrayList<Article>()));
+        Set<Article> setArticle = RegistreArticle.getRegistreArticleInstance().getSetListProduct();
+        List<Article> listArticle = new ArrayList<>(setArticle);
+
+        rv_searchPage.setAdapter(new SearhItemAdapter(R.layout.item_search_page_cardview,context,listArticle));
 
         return view;
     }

@@ -43,7 +43,7 @@ public class SearhItemAdapter extends RecyclerView.Adapter<SearhItemAdapter.View
             super(itemView);
 
             txtArticleTitle = itemView.findViewById(R.id.lblItemSearchItemTitle);
-           // txtArticlePrice = itemView.findViewById(R.id.img_searchImageArticle);
+            txtArticlePrice = itemView.findViewById(R.id.lblItemSearchPrice);
             imgArticleImage = itemView.findViewById(R.id.img_searchImageArticle);
         }
 
@@ -71,7 +71,9 @@ public class SearhItemAdapter extends RecyclerView.Adapter<SearhItemAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.getTxtArticleTitle().setText("sdsdsd");
+        Article article = articleList.get(position);
+        holder.getTxtArticleTitle().setText(article.getTitre());
+        holder.getTxtArticlePrice().setText(String.valueOf(article.getPrix()));
         holder.getImgArticleImage().setBackgroundResource(R.drawable.ic_search);
 
 
@@ -95,7 +97,7 @@ public class SearhItemAdapter extends RecyclerView.Adapter<SearhItemAdapter.View
 
     @Override
     public int getItemCount() {
-        return 100;
+        return articleList.size();
     }
 
 
