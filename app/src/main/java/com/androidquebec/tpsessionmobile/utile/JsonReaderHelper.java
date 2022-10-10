@@ -17,6 +17,9 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class JsonReaderHelper {
 
@@ -108,8 +111,10 @@ public class JsonReaderHelper {
                article.setPrix(object.getDouble("prix"));
                article.setDescription(object.getString("description"));
                article.setTitre(object.getString("titre"));
-               article.setImage(object.getString("image"));
-
+               //article.setImage(object.getString("image"));
+               String uri ="https://raw.githubusercontent.com/brocatz-shared/Tp-Session-Mobile/master/app/productImages/";
+               uri += object.getString("image");
+               article.setImage(uri);
 
 //               article.setDate(LocalDateTime.parse(object.getString("date"), df));
 
@@ -119,5 +124,16 @@ public class JsonReaderHelper {
         } catch ( Exception e) {
             e.printStackTrace();
         }
+
+        ArrayList<Article> companyList = RegistreArticle.getRegistreArticleInstance().getCompanyListProduct();
+        companyList.addAll(RegistreArticle.getRegistreArticleInstance().getSetListProduct());
+        //companyList = new ArrayList<>(RegistreArticle.getRegistreArticleInstance().getSetListProduct());
+
+        Collections.sort(companyList, new Comparator<Article>() {
+                public int compare(Article a1, Article a2) {
+                    return a1.getTitre().compareToIgnoreCase(a2.getTitre());
+                }
+
+        });
     }
 }
