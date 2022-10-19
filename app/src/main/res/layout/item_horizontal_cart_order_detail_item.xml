@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="#CCC"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/img_orderDetailImage"
+            android:layout_width="match_parent"
+            android:src="@drawable/ic_online_shopping"
+            android:layout_height="match_parent" />
+    </androidx.cardview.widget.CardView>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/lblOrderDetailItemName"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="Order Id:"
+            android:paddingLeft="15dp"
+            android:textSize="26dp"
+            android:gravity="center_vertical"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/lblOrderDetailPrie"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="Price"
+            android:paddingLeft="15dp"
+            android:textSize="20dp"
+            android:gravity="center_vertical"
+            android:layout_weight="1"/>
+        <TextView
+        android:id="@+id/lblOrderDetailQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="Quantity : "
+            android:paddingLeft="15dp"
+            android:textSize="20dp"
+            android:gravity="center_vertical"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</LinearLayout>

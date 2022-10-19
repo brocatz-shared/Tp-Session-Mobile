@@ -10,4 +10,10 @@
 
     <color name="bg_mainActivity">#33000000</color>
     <color name="holo_orange_dark">#33FF31</color>
+
+    <color name="red">#d9534f</color>
+    <color name="green_sucess">#198754</color>
+
+    <color name="customprimaryColor">#3F51B5</color>
+    <color name="customprimaryColorDark">#303F9F</color>
 </resources>

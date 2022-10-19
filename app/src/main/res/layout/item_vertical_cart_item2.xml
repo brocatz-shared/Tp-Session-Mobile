@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#CCC"
+    android:orientation="vertical"
+    android:padding="10dp"
+
+    android:layout_height="160dp">
+
+
+
+    <!-- Image And price section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1" >
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" >
+
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/cartImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        </RelativeLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:paddingLeft="20dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/cartItemTitle"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:text="Title"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:layout_height="0dp" />
+
+            <TextView
+                android:id="@+id/cartSpecifiqueItemCOunt"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:textSize="20dp"
+                android:layout_weight="1"
+                android:layout_alignParentTop="true"
+                android:layout_height="0dp" />
+
+
+
+            <TextView
+                android:id="@+id/cartItemPrice"
+                android:layout_width="match_parent"
+                android:text="Price 34.34"
+                android:gravity="center_vertical"
+                android:layout_height="30dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnRemoveOneFromCart"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="30dp"
+            android:text="-"
+            android:textColor="@color/white"
+            android:background="@color/red"
+            android:backgroundTint="@color/red"
+            android:layout_height="match_parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnAddOneToCart"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@color/green_sucess"
+            android:backgroundTint="@color/green_sucess"
+            android:textColor="@color/white"
+            android:text="+"
+            android:textSize="30dp"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

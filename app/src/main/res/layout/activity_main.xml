@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="268dp"
                 android:text="@string/lblLogin"
+                android:textColor="@color/black"
                 android:textAlignment="center"
                 android:textSize="40dp"
 
@@ -74,6 +75,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout2"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 app:endIconMode="password_toggle"
@@ -88,8 +90,7 @@
                     android:id="@+id/txtPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    />
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,15 +108,19 @@
 <!--                app:layout_constraintStart_toStartOf="@+id/txtEmail"-->
 <!--                app:layout_constraintTop_toBottomOf="@+id/txtEmail" />-->
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnLogin"
-                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:background="@color/customprimaryColor"
+                android:textColor="@color/white"
                 android:layout_width="210dp"
                 android:layout_height="48dp"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="40dp"
                 android:text="Login"
                 android:textSize="20dp"
-                />
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
+                app:layout_constraintHorizontal_bias="0.475"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

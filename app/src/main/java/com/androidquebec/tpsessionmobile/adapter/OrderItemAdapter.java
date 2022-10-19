@@ -12,32 +12,44 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidquebec.tpsessionmobile.R;
 import com.androidquebec.tpsessionmobile.model.Article;
+import com.androidquebec.tpsessionmobile.model.Order;
+import com.androidquebec.tpsessionmobile.utile.Calculate;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.ViewHolder> {
 
     int layoutId;
     Activity context;
-    List<Article>  articleList;
+    LinkedHashMap<Order,LinkedHashMap<Article,Integer>> orderList;
+    private static RecycleViewClickListener recycleViewClickListener;
 
-    public OrderItemAdapter (int layoutId, Activity context, List<Article>  articleList) {
+    public OrderItemAdapter (int layoutId, Activity context, LinkedHashMap<Order,LinkedHashMap<Article,Integer>>  orderList, RecycleViewClickListener recycleViewClickListener) {
         this.layoutId = layoutId;
         this.context = context;
-        this.articleList = articleList;
+        this.orderList = orderList;
+        this.recycleViewClickListener =recycleViewClickListener;
     }
 
-    public static class ViewHolder  extends RecyclerView.ViewHolder {
+    public static class ViewHolder  extends RecyclerView.ViewHolder  implements View.OnClickListener {
 
-        public TextView txtArticleTitle, txtArticlePrice;
+        public TextView txtArticleTitle, txtArticlePrice, lblDate;
         public ImageView imgArticleImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            txtArticleTitle = itemView.findViewById(R.id.lblOrderItemTitle);
-            txtArticlePrice = itemView.findViewById(R.id.lblOrderItemPrice);
-            imgArticleImage = itemView.findViewById(R.id.img_orderPage_item);
+            txtArticleTitle = itemView.findViewById(R.id.lblOrderId);
+            txtArticlePrice = itemView.findViewById(R.id.lblOrderTotal);
+            lblDate = itemView.findViewById(R.id.lblOrderDate);
+            imgArticleImage = itemView.findViewById(R.id.img_orderImage);
+
+            itemView.setOnClickListener(this);
         }
 
         public TextView getTxtArticleTitle() {
@@ -52,6 +64,12 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
             return imgArticleImage;
         }
 
+        public TextView getLblDate() { return lblDate; }
+
+        @Override
+        public void onClick(View view) {
+            recycleViewClickListener.recyclerViewListClicked(view,this.getLayoutPosition());
+        }
     }
 
     @NonNull
@@ -64,8 +82,26 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.getTxtArticleTitle().setText("sdsdsd");
-        holder.getImgArticleImage().setBackgroundResource(R.drawable.ic_order);
+       Set<Order> orderSet =  orderList.keySet();
+
+       int customCounter = 0;
+       Order visibleOrder = null;
+       LinkedHashMap<Article,Integer> visibleLinkedHashMap = null;
+       for (Order  order : orderSet) {
+           if (customCounter == position) {
+               visibleLinkedHashMap = orderList.get(order);
+               visibleOrder = order;
+               break;
+           }
+           customCounter ++;
+       }
+
+       double specifiqueCartListTotal = Calculate.calculHashMapTotal(visibleLinkedHashMap);
+
+        holder.getTxtArticleTitle().setText("OrderID: " + visibleOrder.getOrderRef());
+        holder.getTxtArticlePrice().setText( "Price :" + String.format("%.2f", specifiqueCartListTotal) + "$ CAD");
+        holder.getLblDate().setText(visibleOrder.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+       // holder.getImgArticleImage().setBackgroundResource(R.drawable.ic_order);
 
     }
 
@@ -73,6 +109,6 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
 
     @Override
     public int getItemCount() {
-        return articleList.size();
+        return orderList.size();
     }
 }

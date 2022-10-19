@@ -21,11 +21,14 @@
                 android:id="@+id/topAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:title="page_title"
+                app:title="Home"
+                app:titleCentered="true"
                 app:menu="@menu/top_app_bar"
-                app:navigationIcon="@drawable/ic_drawer"
+
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
-                />
+                >
+<!-- app:navigationIcon="@drawable/ic_drawer" -->
+            </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 

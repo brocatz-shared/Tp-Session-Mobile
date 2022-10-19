@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,17 +16,21 @@ import com.androidquebec.tpsessionmobile.R;
 import com.androidquebec.tpsessionmobile.activity.HomeActivity;
 import com.androidquebec.tpsessionmobile.adapter.ItemDecorator;
 import com.androidquebec.tpsessionmobile.adapter.OrderItemAdapter;
+import com.androidquebec.tpsessionmobile.adapter.RecycleViewClickListener;
 import com.androidquebec.tpsessionmobile.model.Article;
+import com.androidquebec.tpsessionmobile.model.Order;
+import com.androidquebec.tpsessionmobile.model.RegistreArticle;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Set;
 
 
-public class OrderFragment extends Fragment {
+public class OrderFragment extends Fragment implements RecycleViewClickListener {
 
     private  HomeActivity context;
 
     OrderItemAdapter orderItemAdapter;
-    ArrayList<Article> list;
 
     public OrderFragment(HomeActivity homeActivity) {
         // Required empty public constructor
@@ -44,40 +49,46 @@ public class OrderFragment extends Fragment {
         // Inflate the layout for this fragment
          View view = inflater.inflate(R.layout.fragment_order, container, false);
 
-        list = new ArrayList<Article>();
-
-        Article article = new Article();
-
-        article.setTitre("Title");
-        article.setPrix(203);
-        article.setDescription("sdsdsds");
-        for (int i =0; i < 5 ; i ++) {
-            list.add(new Article());
-        }
+        LinkedHashMap<Order, LinkedHashMap<Article,Integer>> orderList = RegistreArticle.getRegistreArticleInstance().getOrderListElement();
 
 
         RecyclerView order_RecycleView = view.findViewById(R.id.order_item_recycle_view);
-        orderItemAdapter = new OrderItemAdapter(R.layout.item_horizontal_orderlist,context,list);
+        orderItemAdapter = new OrderItemAdapter(R.layout.item_horizontal_orderlist2,context,orderList, this);
         order_RecycleView.setAdapter(orderItemAdapter);
 
         order_RecycleView.addItemDecoration(new ItemDecorator());
 
-        new ItemTouchHelper(simpleItemTouchCallback).attachToRecyclerView(order_RecycleView);
+        //new ItemTouchHelper(simpleItemTouchCallback).attachToRecyclerView(order_RecycleView);
         return view;
     }
 
 
-    ItemTouchHelper.SimpleCallback simpleItemTouchCallback= new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-            return false;
+    @Override
+    public void recyclerViewListClicked(View v, int position) {
+
+        // Get the current click element
+
+        LinkedHashMap<Order,LinkedHashMap<Article,Integer>> orderList = RegistreArticle.getRegistreArticleInstance().getOrderListElement();
+
+        int customCounter = 0;
+
+        Set<Order> orderSet = orderList.keySet();
+        LinkedHashMap<Article,Integer> selectedOorder = null;
+
+        for (Order order : orderSet) {
+            if (customCounter == position) {
+                selectedOorder = orderList.get(order);
+            }
+            customCounter ++;
         }
 
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            int postion = viewHolder.getAdapterPosition();
-            list.remove(postion);
-            orderItemAdapter.notifyDataSetChanged();
-        }
-    };
+
+
+        OrderDetailFragment orderDetailFragment = new OrderDetailFragment(context,selectedOorder);
+        FragmentTransaction transaction = context.getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.home_fragment, orderDetailFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 }

@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,6 +47,7 @@ public class SearhItemAdapter extends RecyclerView.Adapter<SearhItemAdapter.View
 
         public TextView txtArticleTitle, txtArticlePrice;
         public ImageView imgArticleImage;
+        public Button btnAddToCart;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -53,7 +55,9 @@ public class SearhItemAdapter extends RecyclerView.Adapter<SearhItemAdapter.View
             txtArticleTitle = itemView.findViewById(R.id.lblItemSearchItemTitle);
             txtArticlePrice = itemView.findViewById(R.id.lblItemSearchPrice);
             imgArticleImage = itemView.findViewById(R.id.img_searchImageArticle);
+            btnAddToCart = itemView.findViewById(R.id.btnAddToCart);
 
+            btnAddToCart.setOnClickListener(this);
             itemView.setOnClickListener(this);
         }
 
@@ -106,7 +110,7 @@ public class SearhItemAdapter extends RecyclerView.Adapter<SearhItemAdapter.View
         Article article = articleList.get(position);
         holder.getTxtArticleTitle().setText(article.getTitre());
         holder.getTxtArticlePrice().setText(String.valueOf(article.getPrix()));
-        holder.getImgArticleImage().setBackgroundResource(R.drawable.ic_search);
+        //holder.getImgArticleImage().setBackgroundResource(R.drawable.ic_search);
 
 
         Glide.with(context).load(Uri.parse(article.getImage())).into(holder.imgArticleImage);

@@ -3,6 +3,7 @@ package com.androidquebec.tpsessionmobile.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDateTime;
 import java.util.*;
 
 // Singleton
@@ -87,15 +88,15 @@ public class RegistreArticle {
         }
 
 
-        BigDecimal bd = new BigDecimal(total);
-        bd = bd.setScale(2, RoundingMode.HALF_UP);
-        total = bd.doubleValue();
+//        BigDecimal bd = new BigDecimal(total);
+//        bd = bd.setScale(2, RoundingMode.HALF_UP);
+//        total = bd.doubleValue();
 
         return total;
     }
 
     public void createOrder() {
-        orderListElement.putIfAbsent(new Order(Order.generateOrderNumber(),new Date()),cartListProducts);
+        orderListElement.putIfAbsent(new Order(Order.generateOrderNumber(), LocalDateTime.now()),cartListProducts);
         cartListProducts = new LinkedHashMap<Article,Integer>();
     }
 

@@ -24,8 +24,10 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/cart"
         android:title="Cart"
+        android:iconTint="@color/white"
+        android:iconTintMode="@color/white"
         android:actionLayout="@layout/cartmenulayout"
-        android:icon="@drawable/ic_cart"
+        android:icon="@drawable/ic_cart_white"
         app:showAsAction="always" />
 
 

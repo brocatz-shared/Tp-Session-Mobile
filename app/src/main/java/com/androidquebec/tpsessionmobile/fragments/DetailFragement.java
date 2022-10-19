@@ -9,13 +9,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidquebec.tpsessionmobile.R;
 import com.androidquebec.tpsessionmobile.activity.HomeActivity;
+import com.androidquebec.tpsessionmobile.adapter.ButtonAddToCartClickListener;
 import com.androidquebec.tpsessionmobile.model.Article;
+import com.androidquebec.tpsessionmobile.model.RegistreArticle;
 import com.bumptech.glide.Glide;
+
+import java.util.LinkedHashMap;
 
 public class DetailFragement extends Fragment {
 
@@ -25,10 +31,14 @@ public class DetailFragement extends Fragment {
     private HomeActivity context;
     private Article article;
 
+    public static ButtonAddToCartClickListener buttonAddToCartClickListener;
+
+
     public DetailFragement(HomeActivity homeActivity, Article article) {
         // Required empty public constructor
         context = homeActivity;
         this.article = article;
+        buttonAddToCartClickListener = homeActivity;
     }
 
 
@@ -49,7 +59,9 @@ public class DetailFragement extends Fragment {
         TextView lblTitre = view.findViewById(R.id.lblDetailTitle);
         TextView lblDescription = view.findViewById(R.id.lblDetailDescription);
         TextView lblPrice = view.findViewById(R.id.lblDetailPrice);
+        EditText txtDetailQuantity = view.findViewById(R.id.txtDetailQunatity);
         ImageView imgView = view.findViewById(R.id.imageViewDetail);
+        Button  btnDetailAddTo = view.findViewById(R.id.btnDetailAddTo);
 
 
         lblDescription.setText(article.getDescription());
@@ -58,6 +70,28 @@ public class DetailFragement extends Fragment {
 
         Glide.with(context).load(Uri.parse(article.getImage())).into(imgView);
 
+        btnDetailAddTo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    int quantite = Integer.parseInt(txtDetailQuantity.getText().toString());
+
+                    if (quantite <= 0)
+                        return;
+
+                    // Increment the cart
+                    LinkedHashMap<Article,Integer> cart = RegistreArticle.getRegistreArticleInstance().getCartListProducts();
+                    cart.merge(article,quantite,Integer::sum);
+
+                    // CallBack to update the icon
+                    buttonAddToCartClickListener.buttonClickOnSearchFragment();
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         return view;
     }
